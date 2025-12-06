@@ -5,9 +5,9 @@ COPY pom.xml .
 COPY src /app/src
 RUN mvn clean package -DskipTests
 
-# ESTAGIO 2: PACKAGE (Imagem Final - JRE 17 Buster)
-# Usando a tag openjdk:17-jre-buster, que é mais estável
-FROM openjdk:17-jre-buster
+# ESTAGIO 2: PACKAGE (Imagem Final - JRE 17 Padrão Slim)
+# Usando a tag openjdk:17-jdk-slim, que é muito mais comum e robusta.
+FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Altere 'app.jar' se você usou um nome diferente
