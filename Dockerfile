@@ -1,14 +1,12 @@
-# ESTAGIO 1: BUILD (Compilação - Maven + JDK 17 Alpine)
-# Usando a tag Alpine para o estágio de build
-FROM maven:3-jdk-17-alpine AS build
+# ESTAGIO 1: BUILD (Compilação - Maven + JDK 11)
+FROM maven:3-jdk-11 AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src /app/src
 RUN mvn clean package -DskipTests
 
-# ESTAGIO 2: PACKAGE (Imagem Final - JRE 17 Alpine)
-# Usando a tag Alpine JRE (muito estável e leve)
-FROM openjdk:17-jre-alpine
+# ESTAGIO 2: PACKAGE (Imagem Final - JRE 11 Slim)
+FROM openjdk:11-jre-slim
 WORKDIR /app
 
 # Altere 'app.jar' se você usou um nome diferente
