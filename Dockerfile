@@ -1,13 +1,14 @@
 # ESTAGIO 1: BUILD (Compilação - Maven + JDK 17)
-FROM maven:3-openjdk-17 AS build
+# Usando 'jdk-17' que é uma tag mais padronizada
+FROM maven:3-jdk-17 AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src /app/src
 RUN mvn clean package -DskipTests
 
-# ESTAGIO 2: PACKAGE (Imagem Final - JRE 17 Padrão Slim)
-# Usando a tag openjdk:17-jdk-slim, que é muito mais comum e robusta.
-FROM openjdk:17-jdk-slim
+# ESTAGIO 2: PACKAGE (Imagem Final - JDK 17 Bullseye)
+# Usando a tag de distribuição Linux (Bullseye) que é a mais estável e garantida
+FROM openjdk:17-jdk-bullseye
 WORKDIR /app
 
 # Altere 'app.jar' se você usou um nome diferente
